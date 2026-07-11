@@ -1,0 +1,249 @@
+/* =========================================================
+   성경으로 세상읽기 — 공통 디자인 시스템
+   차분하고 읽기 좋은, 따뜻한 톤의 정적 사이트
+   ========================================================= */
+
+:root {
+  --bg:        #faf7f2;   /* 크림 배경 */
+  --bg-soft:   #f2ede4;   /* 살짝 어두운 면 */
+  --card:      #ffffff;
+  --ink:       #2b2622;   /* 본문 잉크 */
+  --ink-soft:  #5c554d;   /* 보조 텍스트 */
+  --line:      #e6ddcf;   /* 구분선 */
+  --primary:   #33406e;   /* 깊은 남색 */
+  --primary-d: #26305a;
+  --accent:    #b98a2e;   /* 절제된 금빛 */
+  --accent-s:  #f3e7c9;   /* 금빛 배경 */
+  --radius:    14px;
+  --shadow:    0 8px 30px rgba(43, 38, 34, 0.08);
+  --wrap:      1080px;
+  --serif: "Nanum Myeongjo", "Noto Serif KR", Georgia, "Times New Roman", serif;
+  --sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+          "Malgun Gothic", "Noto Sans KR", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 22px; }
+
+/* 읽기 진행바 */
+#progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  z-index: 200; transition: width .1s linear;
+}
+
+/* ---------- 헤더 ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250, 247, 242, 0.92);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 66px;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--serif); font-weight: 700; font-size: 1.18rem;
+  color: var(--ink); letter-spacing: -0.2px;
+}
+.brand:hover { text-decoration: none; }
+.brand .mark {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: linear-gradient(135deg, var(--primary), #4a5a94);
+  color: #fff; display: grid; place-items: center;
+  font-size: 1.05rem; box-shadow: var(--shadow);
+}
+.nav-links { display: flex; align-items: center; gap: 6px; }
+.nav-links a {
+  padding: 8px 14px; border-radius: 8px; color: var(--ink-soft);
+  font-size: .96rem; font-weight: 500;
+}
+.nav-links a:hover { background: var(--bg-soft); color: var(--ink); text-decoration: none; }
+.nav-links a.active { color: var(--primary); font-weight: 700; }
+.nav-toggle {
+  display: none; background: none; border: 0; cursor: pointer;
+  width: 42px; height: 42px; border-radius: 8px;
+}
+.nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+  content: ""; display: block; width: 22px; height: 2px; background: var(--ink);
+  position: relative; margin: 0 auto; transition: .25s;
+}
+.nav-toggle span::before { position: absolute; top: -7px; }
+.nav-toggle span::after  { position: absolute; top: 7px; }
+
+@media (max-width: 760px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 66px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--bg); border-bottom: 1px solid var(--line);
+    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+  }
+  .nav-links.open { max-height: 380px; }
+  .nav-links a { padding: 14px 22px; border-top: 1px solid var(--line); border-radius: 0; }
+}
+
+/* ---------- 히어로 ---------- */
+.hero {
+  padding: 76px 0 60px;
+  background:
+    radial-gradient(1200px 400px at 80% -10%, rgba(185,138,46,.10), transparent),
+    radial-gradient(900px 400px at 0% 0%, rgba(51,64,110,.08), transparent);
+}
+.hero .eyebrow {
+  display: inline-block; font-size: .82rem; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 14px;
+}
+.hero h1 {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(2.1rem, 5vw, 3.3rem); line-height: 1.25;
+  margin: 0 0 18px; letter-spacing: -0.5px;
+}
+.hero p.lead {
+  font-size: 1.14rem; color: var(--ink-soft); max-width: 640px; margin: 0 0 28px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* 버튼 */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 1rem;
+  border: 1px solid transparent; cursor: pointer; transition: .18s;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-d); text-decoration: none; }
+.btn-ghost { background: transparent; color: var(--primary); border-color: var(--line); }
+.btn-ghost:hover { background: var(--bg-soft); text-decoration: none; }
+
+/* ---------- 오늘의 말씀 카드 ---------- */
+.verse-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 30px 32px; margin: -30px auto 0; max-width: 760px; position: relative;
+}
+.verse-card .tag {
+  font-size: .78rem; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--accent); font-weight: 700;
+}
+.verse-card blockquote {
+  font-family: var(--serif); font-size: 1.32rem; line-height: 1.7;
+  margin: 12px 0 10px; color: var(--ink);
+}
+.verse-card cite { color: var(--ink-soft); font-style: normal; font-weight: 600; }
+.verse-refresh {
+  position: absolute; top: 22px; right: 24px;
+  background: var(--bg-soft); border: 1px solid var(--line); color: var(--ink-soft);
+  width: 38px; height: 38px; border-radius: 9px; cursor: pointer; font-size: 1rem;
+}
+.verse-refresh:hover { color: var(--primary); }
+
+/* ---------- 섹션 ---------- */
+section.block { padding: 64px 0; }
+.section-head { margin-bottom: 34px; }
+.section-head h2 {
+  font-family: var(--serif); font-size: 1.9rem; margin: 0 0 8px; letter-spacing: -0.3px;
+}
+.section-head p { color: var(--ink-soft); margin: 0; }
+
+/* ---------- 칼럼 카드 그리드 ---------- */
+.grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.col-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; transition: .2s; display: flex; flex-direction: column;
+}
+.col-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); text-decoration: none; }
+.col-card .cc-top {
+  height: 116px; display: grid; place-items: center; font-size: 2.4rem;
+  background: linear-gradient(135deg, var(--accent-s), #eef1f8);
+}
+.col-card .cc-body { padding: 20px 22px 24px; }
+.col-card .cc-cat {
+  font-size: .78rem; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--accent); font-weight: 700;
+}
+.col-card h3 { font-family: var(--serif); font-size: 1.22rem; margin: 8px 0 8px; color: var(--ink); }
+.col-card p { color: var(--ink-soft); font-size: .95rem; margin: 0; }
+
+/* ---------- 본문(아티클) ---------- */
+.article { padding: 54px 0 40px; }
+.article-wrap { max-width: 720px; margin: 0 auto; }
+.article .kicker {
+  color: var(--accent); font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; font-size: .82rem;
+}
+.article h1 {
+  font-family: var(--serif); font-size: clamp(1.9rem, 4.5vw, 2.6rem);
+  line-height: 1.3; margin: 10px 0 12px; letter-spacing: -0.4px;
+}
+.article .meta { color: var(--ink-soft); font-size: .92rem; margin-bottom: 30px; }
+.article-body { font-size: 1.08rem; }
+.article-body h2 {
+  font-family: var(--serif); font-size: 1.5rem; margin: 40px 0 12px;
+  padding-top: 6px;
+}
+.article-body p { margin: 0 0 20px; }
+.article-body .verse {
+  border-left: 3px solid var(--accent); background: var(--bg-soft);
+  padding: 16px 22px; border-radius: 0 10px 10px 0; margin: 26px 0;
+  font-family: var(--serif); font-size: 1.12rem; color: var(--ink);
+}
+.article-body .verse cite { display: block; margin-top: 8px; font-style: normal;
+  font-size: .9rem; color: var(--ink-soft); font-family: var(--sans); font-weight: 600; }
+.article-body ul { padding-left: 20px; margin: 0 0 20px; }
+.article-body li { margin-bottom: 8px; }
+.article-nav {
+  display: flex; justify-content: space-between; gap: 14px;
+  margin: 40px 0 0; padding-top: 26px; border-top: 1px solid var(--line);
+}
+
+/* ---------- 소개/일반 본문 ---------- */
+.prose { max-width: 720px; margin: 0 auto; padding: 54px 0; }
+.prose h1 { font-family: var(--serif); font-size: 2.2rem; margin: 0 0 8px; }
+.prose h2 { font-family: var(--serif); font-size: 1.4rem; margin: 36px 0 10px; }
+.prose p { color: var(--ink); margin: 0 0 18px; }
+.prose .lead { font-size: 1.15rem; color: var(--ink-soft); }
+
+/* ---------- 연락/CTA 밴드 ---------- */
+.band {
+  background: linear-gradient(135deg, var(--primary), #45538c);
+  color: #fff; border-radius: var(--radius); padding: 48px 40px; text-align: center;
+  box-shadow: var(--shadow);
+}
+.band h2 { font-family: var(--serif); font-size: 1.7rem; margin: 0 0 10px; color: #fff; }
+.band p { color: #dfe3f2; margin: 0 0 22px; }
+.band .btn-primary { background: #fff; color: var(--primary); }
+.band .btn-primary:hover { background: #f0f0f0; }
+
+/* ---------- 푸터 ---------- */
+.site-footer {
+  border-top: 1px solid var(--line); background: var(--bg-soft);
+  padding: 40px 0; margin-top: 20px; color: var(--ink-soft); font-size: .92rem;
+}
+.footer-grid { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.site-footer .brand { font-size: 1.05rem; margin-bottom: 8px; }
+.site-footer a { color: var(--ink-soft); }
+.footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+/* 유틸 */
+.center { text-align: center; }
+.mt-lg { margin-top: 40px; }

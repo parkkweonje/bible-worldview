@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>연락 — 성경으로 세상읽기</title>
+  <meta name="description" content="묵상 나눔, 글 제안, 함께 읽고 싶은 주제를 남겨 주세요." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html"><span class="mark">✝</span> 성경으로 세상읽기</a>
+      <button class="nav-toggle" aria-label="메뉴 열기"><span></span></button>
+      <nav class="nav-links">
+        <a href="index.html">홈</a>
+        <a href="columns.html">칼럼</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html" class="active">연락</a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="prose">
+    <h1>연락 남기기</h1>
+    <p class="lead">
+      함께 읽고 싶은 주제, 나누고 싶은 묵상, 혹은 그냥 인사도 좋습니다.
+      아래에 적으면 메일 앱으로 이어집니다.
+    </p>
+
+    <form id="contact-form" style="margin-top:10px">
+      <label style="display:block;font-weight:600;margin:14px 0 6px">이름 (선택)</label>
+      <input id="cf-name" type="text" placeholder="이름"
+        style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:1rem;background:var(--card)" />
+
+      <label style="display:block;font-weight:600;margin:18px 0 6px">주제 / 하고 싶은 말</label>
+      <textarea id="cf-msg" rows="6" placeholder="예: ‘돈’ 칼럼을 읽고 든 생각을 나누고 싶어요…"
+        style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:1rem;background:var(--card);resize:vertical"></textarea>
+
+      <button type="submit" class="btn btn-primary" style="margin-top:18px">메일로 보내기 →</button>
+    </form>
+
+    <p style="margin-top:26px;color:var(--ink-soft)">
+      또는 바로 메일: <a href="mailto:midas6971@gmail.com">midas6971@gmail.com</a>
+    </p>
+  </article>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <div class="brand"><span class="mark">✝</span> 성경으로 세상읽기</div>
+        <div>성경의 눈으로 세상과 삶을 읽어냅니다.</div>
+      </div>
+      <nav class="footer-links">
+        <a href="index.html">홈</a>
+        <a href="columns.html">칼럼</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">연락</a>
+      </nav>
+    </div>
+    <div class="wrap" style="margin-top:18px">© <span data-year>2026</span> 성경으로 세상읽기 · All rights reserved.</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = document.getElementById("cf-name").value.trim();
+      var msg = document.getElementById("cf-msg").value.trim();
+      var subject = encodeURIComponent("[성경으로 세상읽기] " + (name ? name + "님의 " : "") + "메시지");
+      var body = encodeURIComponent((name ? name + " 드림\n\n" : "") + msg);
+      window.location.href = "mailto:midas6971@gmail.com?subject=" + subject + "&body=" + body;
+    });
+  </script>
+</body>
+</html>
