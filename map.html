@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인터랙티브 성경 지도 — 성경으로 세상읽기</title>
+  <meta name="description" content="예루살렘·갈릴리·베들레헴 등 성경 속 주요 장소를 지도에서 클릭해 사건과 성경절을 확인하세요." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html"><span class="mark">✝</span> 성경으로 세상읽기</a>
+      <button class="nav-toggle" aria-label="메뉴 열기"><span></span></button>
+      <nav class="nav-links">
+        <a href="index.html">홈</a>
+        <a href="topics.html">주제별 말씀</a>
+        <a href="calendar.html">교회력</a>
+        <a href="toolkit.html">설교도구</a>
+        <a href="people.html">인물사전</a>
+        <a href="genealogy.html">족보</a>
+        <a href="map.html" class="active">지도</a>
+        <a href="art.html">명화</a>
+        <a href="quotes.html">명언</a>
+        <a href="library.html">자료실</a>
+        <a href="about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:56px 0 20px">
+    <div class="wrap">
+      <span class="eyebrow">Interactive Bible Map</span>
+      <h1 style="font-size:clamp(1.9rem,4.6vw,2.8rem)">인터랙티브 성경 지도</h1>
+      <p class="lead">
+        지도의 장소를 <strong>클릭</strong>하면 그곳에서 일어난 성경 사건과 관련 성경절이 오른쪽에 나타납니다.
+        설교·영상에서 지리를 설명할 때 활용하세요.
+      </p>
+    </div>
+  </section>
+
+  <section class="block" style="padding:20px 0 40px">
+    <div class="wrap">
+      <div class="map-layout">
+        <div class="map-box">
+          <svg viewBox="0 0 380 560" role="img" aria-label="성경 시대 이스라엘 지도">
+            <!-- 육지 -->
+            <rect x="0" y="0" width="380" height="560" fill="#e6dcc2"/>
+            <!-- 지중해 -->
+            <polygon points="0,0 78,0 104,560 0,560" fill="#a6cad9"/>
+            <text x="42" y="300" transform="rotate(-90 42 300)" font-size="13" fill="#4a7f92" font-weight="700" text-anchor="middle" style="letter-spacing:2px">지중해</text>
+            <!-- 갈릴리 바다 -->
+            <ellipse cx="252" cy="110" rx="20" ry="26" fill="#8fbfd4"/>
+            <!-- 사해 -->
+            <ellipse cx="242" cy="442" rx="22" ry="58" fill="#8fbfd4"/>
+            <!-- 요단강 -->
+            <path d="M252,136 C244,190 262,220 250,260 C240,300 252,340 242,384" fill="none" stroke="#8fbfd4" stroke-width="4" stroke-linecap="round"/>
+            <text x="284" y="250" font-size="11" fill="#4a7f92" font-weight="700" transform="rotate(78 284 250)" text-anchor="middle">요단강</text>
+            <g id="pins"></g>
+          </svg>
+        </div>
+
+        <aside class="map-panel">
+          <div id="mp-empty">
+            <p class="mp-hint">👈 지도에서 장소를 클릭하거나, 아래 목록에서 골라 보세요.</p>
+          </div>
+          <div id="mp-content" style="display:none">
+            <span class="mp-cat" id="mp-cat"></span>
+            <h3 id="mp-name"></h3>
+            <p class="mp-en" id="mp-en"></p>
+            <p class="mp-desc" id="mp-desc"></p>
+            <blockquote class="mp-verse" id="mp-verse"></blockquote>
+          </div>
+          <div class="map-list" id="mp-list"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <div class="brand"><span class="mark">✝</span> 성경으로 세상읽기</div>
+        <div>설교와 콘텐츠를 위한 성경 자료 허브.</div>
+      </div>
+      <nav class="footer-links">
+        <a href="topics.html">주제별 말씀</a>
+        <a href="calendar.html">교회력</a>
+        <a href="toolkit.html">설교도구</a>
+        <a href="people.html">인물사전</a>
+        <a href="genealogy.html">족보</a>
+        <a href="map.html">지도</a>
+        <a href="art.html">명화</a>
+        <a href="quotes.html">명언</a>
+        <a href="library.html">자료실</a>
+        <a href="columns.html">칼럼</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">연락</a>
+      </nav>
+    </div>
+    <div class="wrap" style="margin-top:18px">© <span data-year>2026</span> 성경으로 세상읽기 · All rights reserved.</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var SVGNS = "http://www.w3.org/2000/svg";
+    var PLACES = [
+      {n:"가버나움", e:"Capernaum", x:238, y:92, a:"end", cat:"갈릴리",
+       d:"예수님이 갈릴리 사역의 본거지로 삼으신 호숫가 마을. 수많은 기적과 가르침이 여기서 일어났습니다.",
+       vt:"나사렛을 떠나 스불론과 납달리 지경 해변에 있는 가버나움에 가서 사시니", vr:"마태복음 4:13"},
+      {n:"갈릴리 바다", e:"Sea of Galilee", x:252, y:110, a:"end", cat:"갈릴리",
+       d:"예수님이 어부들을 제자로 부르시고, 물 위를 걸으시며 풍랑을 잔잔케 하신 호수.",
+       vt:"갈릴리 해변으로 지나가시다가 시몬과 그의 형제 안드레가 바다에 그물 던지는 것을 보시니", vr:"마가복음 1:16"},
+      {n:"나사렛", e:"Nazareth", x:176, y:128, a:"start", cat:"갈릴리",
+       d:"예수님이 유년기와 청년기를 보내신 갈릴리의 작은 동네.",
+       vt:"주의 율법을 따라 모든 일을 마치고 갈릴리 자기 동네 나사렛으로 돌아가니라", vr:"누가복음 2:39"},
+      {n:"세겜", e:"Shechem", x:206, y:214, a:"start", cat:"중부",
+       d:"아브라함이 가나안에서 처음 제단을 쌓은 곳이자 야곱의 우물이 있던 성읍.",
+       vt:"여호와께서 아브람에게 나타나 … 그가 자기에게 나타나신 여호와께 그곳에서 제단을 쌓고", vr:"창세기 12:7"},
+      {n:"사마리아", e:"Samaria", x:184, y:238, a:"start", cat:"중부",
+       d:"유대인이 상종하지 않던 땅. 예수님이 우물가의 여인에게 ‘생수’를 전하신 곳.",
+       vt:"사마리아 여자 한 사람이 물을 길으러 왔으매 예수께서 물을 좀 달라 하시니", vr:"요한복음 4:7"},
+      {n:"욥바", e:"Joppa", x:90, y:256, a:"start", cat:"해안",
+       d:"요나가 다시스로 도망치려 배를 탄 항구이자, 베드로가 이방 선교의 환상을 본 곳.",
+       vt:"이튿날 … 베드로가 기도하려고 지붕에 올라가니", vr:"사도행전 10:9"},
+      {n:"여리고", e:"Jericho", x:246, y:320, a:"end", cat:"요단 근처",
+       d:"여호수아 때 성벽이 무너진 성이자, 예수님이 세리장 삭개오를 만나신 곳.",
+       vt:"이에 백성은 외치고 제사장들은 나팔을 불매 … 성벽이 무너져 내린지라", vr:"여호수아 6:20"},
+      {n:"요단강", e:"Jordan River", x:256, y:252, a:"end", cat:"강",
+       d:"이스라엘이 건너 가나안에 들어간 강이자, 예수님이 세례 요한에게 세례 받으신 곳.",
+       vt:"예수께서 세례를 받으시고 곧 물에서 올라오실새 하늘이 열리고 하나님의 성령이 … 임하심을 보시더니", vr:"마태복음 3:16"},
+      {n:"예루살렘", e:"Jerusalem", x:208, y:334, a:"start", cat:"중심 도시",
+       d:"다윗의 도성, 성전이 선 곳, 예수님의 십자가와 부활, 그리고 교회가 시작된 구원사의 중심.",
+       vt:"예수께서 승천하실 기약이 차가매 예루살렘을 향하여 올라가기로 굳게 결심하시고", vr:"누가복음 9:51"},
+      {n:"베들레헴", e:"Bethlehem", x:200, y:360, a:"start", cat:"유대",
+       d:"다윗이 태어난 마을이자, 예언대로 그리스도가 나신 곳.",
+       vt:"베들레헴 에브라다야 … 이스라엘을 다스릴 자가 네게서 내게로 나올 것이라", vr:"미가 5:2"},
+      {n:"헤브론", e:"Hebron", x:190, y:404, a:"start", cat:"유대",
+       d:"아브라함이 산 막벨라 굴(족장들의 무덤)이 있고, 다윗이 처음 왕이 된 성.",
+       vt:"다윗이 헤브론에서 유다 족속의 왕이 된 날 수는 칠 년 육 개월이더라", vr:"사무엘하 2:11"},
+      {n:"브엘세바", e:"Beersheba", x:150, y:472, a:"start", cat:"남방",
+       d:"아브라함과 이삭이 우물을 두고 언약을 맺은, 약속의 땅 남쪽 경계 성읍.",
+       vt:"두 사람이 거기서 서로 맹세하였으므로 그곳을 브엘세바라 이름하였더라", vr:"창세기 21:31"}
+    ];
+
+    var pins=document.getElementById("pins");
+    var list=document.getElementById("mp-list");
+    var empty=document.getElementById("mp-empty");
+    var content=document.getElementById("mp-content");
+    var pinEls=[];
+
+    function select(i){
+      var p=PLACES[i];
+      empty.style.display="none"; content.style.display="block";
+      document.getElementById("mp-cat").textContent=p.cat;
+      document.getElementById("mp-name").textContent=p.n;
+      document.getElementById("mp-en").textContent=p.e;
+      document.getElementById("mp-desc").textContent=p.d;
+      document.getElementById("mp-verse").innerHTML="“"+p.vt+"”<cite>— "+p.vr+"</cite>";
+      pinEls.forEach(function(g,j){ g.classList.toggle("active", j===i); });
+      list.querySelectorAll("button").forEach(function(b,j){ b.classList.toggle("active", j===i); });
+    }
+
+    PLACES.forEach(function(p,i){
+      var g=document.createElementNS(SVGNS,"g");
+      g.setAttribute("class","map-pin");
+      g.setAttribute("transform","translate("+p.x+","+p.y+")");
+      g.setAttribute("tabindex","0");
+      g.setAttribute("role","button");
+      g.setAttribute("aria-label",p.n);
+      var c=document.createElementNS(SVGNS,"circle");
+      c.setAttribute("r","6"); c.setAttribute("fill","#b98a2e");
+      var t=document.createElementNS(SVGNS,"text");
+      t.setAttribute("class","map-label");
+      t.setAttribute("x", p.a==="end" ? "-10" : "10");
+      t.setAttribute("y","4");
+      t.setAttribute("text-anchor", p.a==="end" ? "end" : "start");
+      t.textContent=p.n;
+      g.appendChild(c); g.appendChild(t);
+      g.addEventListener("click",function(){ select(i); });
+      g.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); select(i);} });
+      pins.appendChild(g); pinEls.push(g);
+
+      var b=document.createElement("button"); b.textContent=p.n;
+      b.addEventListener("click",function(){ select(i); });
+      list.appendChild(b);
+    });
+  })();
+  </script>
+</body>
+</html>

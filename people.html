@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>성경 인물 사전 — 성경으로 세상읽기</title>
+  <meta name="description" content="아담부터 바울까지 성경 주요 인물의 역할·이야기·핵심 성경절을 한눈에. 시대별 필터와 검색 지원." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html"><span class="mark">✝</span> 성경으로 세상읽기</a>
+      <button class="nav-toggle" aria-label="메뉴 열기"><span></span></button>
+      <nav class="nav-links">
+        <a href="index.html">홈</a>
+        <a href="topics.html">주제별 말씀</a>
+        <a href="calendar.html">교회력</a>
+        <a href="toolkit.html">설교도구</a>
+        <a href="people.html" class="active">인물사전</a>
+        <a href="genealogy.html">족보</a>
+        <a href="map.html">지도</a>
+        <a href="art.html">명화</a>
+        <a href="quotes.html">명언</a>
+        <a href="library.html">자료실</a>
+        <a href="about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:56px 0 26px">
+    <div class="wrap">
+      <span class="eyebrow">Bible Character Dictionary</span>
+      <h1 style="font-size:clamp(1.9rem,4.6vw,2.8rem)">성경 인물 사전</h1>
+      <p class="lead">
+        아담부터 바울까지, 성경 주요 인물의 <strong>역할·이야기·핵심 성경절</strong>을 한눈에.
+        시대로 걸러 보거나 이름·키워드로 검색하세요.
+      </p>
+    </div>
+  </section>
+
+  <section class="block" style="padding:26px 0">
+    <div class="wrap">
+      <div class="topic-tools">
+        <input id="p-search" type="search" placeholder="🔍 이름·역할·키워드로 검색 (예: 다윗, 선지자, 방주)" aria-label="인물 검색" />
+      </div>
+      <div class="chip-row" id="p-chips"></div>
+      <div class="topic-grid" id="p-grid"></div>
+      <div class="no-result" id="p-none" style="display:none">검색 결과가 없습니다.</div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <div class="brand"><span class="mark">✝</span> 성경으로 세상읽기</div>
+        <div>설교와 콘텐츠를 위한 성경 자료 허브.</div>
+      </div>
+      <nav class="footer-links">
+        <a href="topics.html">주제별 말씀</a>
+        <a href="calendar.html">교회력</a>
+        <a href="toolkit.html">설교도구</a>
+        <a href="people.html">인물사전</a>
+        <a href="genealogy.html">족보</a>
+        <a href="map.html">지도</a>
+        <a href="art.html">명화</a>
+        <a href="quotes.html">명언</a>
+        <a href="library.html">자료실</a>
+        <a href="columns.html">칼럼</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">연락</a>
+      </nav>
+    </div>
+    <div class="wrap" style="margin-top:18px">© <span data-year>2026</span> 성경으로 세상읽기 · All rights reserved.</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var P = [
+      {c:"족장", n:"아담", e:"Adam", role:"첫 사람", f:"하나님의 형상으로 지음받은 인류의 조상. 불순종으로 죄와 죽음이 세상에 들어왔습니다.", vt:"여호와 하나님이 땅의 흙으로 사람을 지으시고 생기를 그 코에 불어넣으시니 사람이 생령이 되니라", vr:"창세기 2:7"},
+      {c:"족장", n:"노아", e:"Noah", role:"방주의 사람", f:"당대의 의인. 홍수 심판 가운데 방주로 생명을 보존한 새 인류의 조상.", vt:"노아는 의인이요 당대에 완전한 자라 그가 하나님과 동행하였으며", vr:"창세기 6:9"},
+      {c:"족장", n:"아브라함", e:"Abraham", role:"믿음의 조상", f:"부르심을 따라 고향을 떠나 언약을 받은 믿음의 조상. 모든 믿는 자의 아버지.", vt:"아브람이 여호와를 믿으니 여호와께서 이를 그의 의로 여기시고", vr:"창세기 15:6"},
+      {c:"족장", n:"사라", e:"Sarah", role:"약속의 어머니", f:"아브라함의 아내. 노년에 웃음의 아들 이삭을 낳은 믿음의 여인.", vt:"사라가 이르되 하나님이 나를 웃게 하시니 듣는 자가 다 나와 함께 웃으리로다", vr:"창세기 21:6"},
+      {c:"족장", n:"이삭", e:"Isaac", role:"약속의 아들", f:"아브라함과 사라의 아들. 다투기보다 우물을 양보한 온유한 족장.", vt:"두려워하지 말라 내가 너와 함께 있어 네게 복을 주어", vr:"창세기 26:24"},
+      {c:"족장", n:"야곱", e:"Jacob", role:"이스라엘", f:"얍복강 씨름 후 ‘이스라엘’로 개명. 열두 지파의 아버지.", vt:"네 이름을 다시는 야곱이라 부를 것이 아니요 이스라엘이라 부를 것이니", vr:"창세기 32:28"},
+      {c:"족장", n:"요셉", e:"Joseph", role:"애굽의 총리", f:"형들에게 팔렸으나 애굽의 총리가 되어 기근에서 가족을 구원.", vt:"당신들은 나를 해하려 하였으나 하나님은 그것을 선으로 바꾸사", vr:"창세기 50:20"},
+
+      {c:"출애굽·광야", n:"모세", e:"Moses", role:"출애굽의 지도자", f:"이스라엘을 애굽에서 이끌어 내고 시내산에서 율법을 받은 지도자.", vt:"하나님이 모세에게 이르시되 나는 스스로 있는 자이니라", vr:"출애굽기 3:14"},
+      {c:"출애굽·광야", n:"아론", e:"Aaron", role:"첫 대제사장", f:"모세의 형이자 대변자. 이스라엘의 첫 대제사장.", vt:"그가 너를 대신하여 백성에게 말할 것이니 그는 네 입을 대신할 것이요", vr:"출애굽기 4:16"},
+      {c:"출애굽·광야", n:"미리암", e:"Miriam", role:"여선지자", f:"모세의 누이. 홍해를 건넌 뒤 소고를 잡고 찬양을 이끌었습니다.", vt:"아론의 누이 여선지자 미리암이 손에 소고를 잡으매", vr:"출애굽기 15:20"},
+      {c:"출애굽·광야", n:"여호수아", e:"Joshua", role:"가나안 정복자", f:"모세의 후계자. 요단을 건너 가나안 땅을 정복한 지도자.", vt:"강하고 담대하라 두려워하지 말며 놀라지 말라 … 여호와가 너와 함께 하느니라", vr:"여호수아 1:9"},
+      {c:"출애굽·광야", n:"갈렙", e:"Caleb", role:"믿음의 정탐꾼", f:"열두 정탐꾼 중 여호수아와 함께 믿음의 보고를 올린 용사.", vt:"그는 나를 온전히 따랐은즉 내가 그를 그 땅으로 인도하여 들이리니", vr:"민수기 14:24"},
+
+      {c:"사사·왕정", n:"드보라", e:"Deborah", role:"여사사", f:"이스라엘을 이끈 여선지자·사사. 바락과 함께 시스라를 물리쳤습니다.", vt:"그 때에 랍비돗의 아내 여선지자 드보라가 이스라엘의 사사가 되었는데", vr:"사사기 4:4"},
+      {c:"사사·왕정", n:"기드온", e:"Gideon", role:"삼백 용사의 사사", f:"단 삼백 명으로 미디안 대군을 이긴 사사. 약함 속의 승리.", vt:"여호와께서 그와 함께 계시되 큰 용사여 여호와께서 너와 함께 계시도다", vr:"사사기 6:12"},
+      {c:"사사·왕정", n:"삼손", e:"Samson", role:"힘의 사사", f:"나실인 사사. 블레셋과 싸운 괴력의 인물이자 실패와 회복의 이야기.", vt:"주 여호와여 구하옵나니 나를 생각하옵소서 이번만 나를 강하게 하사", vr:"사사기 16:28"},
+      {c:"사사·왕정", n:"룻", e:"Ruth", role:"신실한 모압 여인", f:"시어머니를 따라 이스라엘 신앙에 접붙여진 다윗의 증조모.", vt:"어머니의 백성이 나의 백성이 되고 어머니의 하나님이 나의 하나님이 되시리니", vr:"룻기 1:16"},
+      {c:"사사·왕정", n:"한나", e:"Hannah", role:"사무엘의 어머니", f:"서원 기도로 사무엘을 낳아 하나님께 드린 기도의 여인.", vt:"이 아이를 위하여 내가 기도하였더니 내가 구하여 기도한 것을 주셨도다", vr:"사무엘상 1:27"},
+      {c:"사사·왕정", n:"사무엘", e:"Samuel", role:"마지막 사사·선지자", f:"사울과 다윗에게 기름 부은 선지자이자 이스라엘의 마지막 사사.", vt:"말씀하옵소서 주의 종이 듣겠나이다", vr:"사무엘상 3:10"},
+      {c:"사사·왕정", n:"사울", e:"Saul", role:"이스라엘의 첫 왕", f:"이스라엘의 첫 왕. 순종하지 못해 왕위를 잃은 비극의 인물.", vt:"순종이 제사보다 낫고 듣는 것이 숫양의 기름보다 나으니", vr:"사무엘상 15:22"},
+      {c:"사사·왕정", n:"다윗", e:"David", role:"목자 왕", f:"골리앗을 이긴 목동에서 왕이 된, 하나님 마음에 맞는 사람.", vt:"내가 보는 것은 사람과 같지 아니하니 … 여호와는 중심을 보느니라", vr:"사무엘상 16:7"},
+      {c:"사사·왕정", n:"솔로몬", e:"Solomon", role:"지혜의 왕", f:"성전을 건축한 지혜의 왕. 그러나 말년에 마음이 나뉜 경고의 인물.", vt:"듣는 마음을 종에게 주사 주의 백성을 재판하여 선악을 분별하게 하옵소서", vr:"열왕기상 3:9"},
+      {c:"사사·왕정", n:"에스더", e:"Esther", role:"유대 민족을 구한 왕후", f:"페르시아의 왕후가 되어 목숨을 걸고 자기 민족을 구원한 여인.", vt:"죽으면 죽으리이다 하니라", vr:"에스더 4:16"},
+
+      {c:"선지자", n:"엘리야", e:"Elijah", role:"불의 선지자", f:"갈멜산에서 바알 선지자와 대결해 참 하나님을 드러낸 선지자.", vt:"여호와가 만일 하나님이면 그를 따르고 바알이 만일 하나님이면 그를 따를지니라", vr:"열왕기상 18:21"},
+      {c:"선지자", n:"엘리사", e:"Elisha", role:"갑절의 영감", f:"엘리야의 후계자. 많은 기적으로 하나님의 자비를 보인 선지자.", vt:"당신의 영감이 갑절이나 내게 있기를 구하나이다", vr:"열왕기하 2:9"},
+      {c:"선지자", n:"이사야", e:"Isaiah", role:"메시아의 선지자", f:"임마누엘과 고난받는 종을 예언한 복음적 선지자.", vt:"내가 여기 있나이다 나를 보내소서", vr:"이사야 6:8"},
+      {c:"선지자", n:"예레미야", e:"Jeremiah", role:"눈물의 선지자", f:"유다의 멸망을 눈물로 선포하고 새 언약을 예언한 선지자.", vt:"내가 너를 모태에 짓기 전에 너를 알았고 … 여러 나라의 선지자로 세웠노라", vr:"예레미야 1:5"},
+      {c:"선지자", n:"에스겔", e:"Ezekiel", role:"환상의 선지자", f:"포로 중에 마른 뼈 골짜기 환상으로 회복의 소망을 전한 선지자.", vt:"내가 생기를 너희에게 들어가게 하리니 너희가 살아나리라", vr:"에스겔 37:5"},
+      {c:"선지자", n:"다니엘", e:"Daniel", role:"사자굴의 선지자", f:"바벨론 궁정에서 타협하지 않고 신앙을 지킨 지혜자.", vt:"전에 하던 대로 하루 세 번씩 무릎을 꿇고 기도하며 그의 하나님께 감사하였더라", vr:"다니엘 6:10"},
+      {c:"선지자", n:"요나", e:"Jonah", role:"물고기 뱃속의 선지자", f:"니느웨로 보냄받았으나 도망친, 하나님의 넓은 자비를 배운 선지자.", vt:"나는 감사하는 목소리로 주께 제사를 드리며 … 구원은 여호와께 속하였나이다", vr:"요나 2:9"},
+
+      {c:"신약", n:"세례 요한", e:"John the Baptist", role:"길을 예비한 자", f:"광야에서 회개를 외치며 예수님의 길을 예비한 마지막 선지자.", vt:"보라 세상 죄를 지고 가는 하나님의 어린 양이로다", vr:"요한복음 1:29"},
+      {c:"신약", n:"마리아", e:"Mary", role:"예수의 어머니", f:"성령으로 그리스도를 잉태한 순종의 여인.", vt:"주의 여종이오니 말씀대로 내게 이루어지이다", vr:"누가복음 1:38"},
+      {c:"신약", n:"예수 그리스도", e:"Jesus Christ", role:"구주 · 하나님의 아들", f:"성육신하신 하나님의 아들, 십자가와 부활로 인류를 구원하신 주.", vt:"내가 곧 길이요 진리요 생명이니 나로 말미암지 않고는 아버지께로 올 자가 없느니라", vr:"요한복음 14:6"},
+      {c:"신약", n:"베드로", e:"Peter", role:"반석 사도", f:"열두 제자의 대표. 부인의 실패를 딛고 초대교회의 기둥이 된 사도.", vt:"주는 그리스도시요 살아 계신 하나님의 아들이시니이다", vr:"마태복음 16:16"},
+      {c:"신약", n:"요한", e:"John", role:"사랑의 사도", f:"예수의 사랑받은 제자. 요한복음·서신·계시록의 저자.", vt:"제자 중 하나 곧 예수께서 사랑하시는 자가 예수의 품에 의지하여 누웠는지라", vr:"요한복음 13:23"},
+      {c:"신약", n:"바울", e:"Paul", role:"이방인의 사도", f:"교회를 박해하다 회심하여 복음을 이방에 전한 최대의 선교사.", vt:"내가 그리스도와 함께 십자가에 못 박혔나니 … 내 안에 그리스도께서 사시는 것이라", vr:"갈라디아서 2:20"},
+      {c:"신약", n:"막달라 마리아", e:"Mary Magdalene", role:"부활의 첫 증인", f:"고침받은 뒤 예수를 끝까지 따랐고, 부활하신 주를 처음 만난 여인.", vt:"예수께서 마리아야 하시거늘 마리아가 돌이켜 … 랍오니 하니", vr:"요한복음 20:16"}
+    ];
+
+    var grid=document.getElementById("p-grid"), chips=document.getElementById("p-chips"),
+        search=document.getElementById("p-search"), none=document.getElementById("p-none");
+    var cats=["전체"]; P.forEach(function(x){ if(cats.indexOf(x.c)<0) cats.push(x.c); });
+    var active="전체";
+    cats.forEach(function(c){
+      var b=document.createElement("button"); b.className="chip"+(c==="전체"?" active":""); b.textContent=c;
+      b.addEventListener("click",function(){ active=c; chips.querySelectorAll(".chip").forEach(function(x){x.classList.remove("active");}); b.classList.add("active"); render(); });
+      chips.appendChild(b);
+    });
+    function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+    function render(){
+      var q=(search.value||"").trim().toLowerCase(); grid.innerHTML=""; var n=0;
+      P.forEach(function(x){
+        if(active!=="전체" && x.c!==active) return;
+        if(q){ var hay=(x.n+" "+x.e+" "+x.role+" "+x.f+" "+x.c).toLowerCase(); if(hay.indexOf(q)<0) return; }
+        n++;
+        var d=document.createElement("div"); d.className="pcard";
+        d.innerHTML='<span class="cat">'+esc(x.c)+'</span>'+
+          '<div class="pcard-head"><h3>'+esc(x.n)+'</h3><span class="en">'+esc(x.e)+'</span></div>'+
+          '<p class="role">'+esc(x.role)+'</p>'+
+          '<p class="fact">'+esc(x.f)+'</p>'+
+          '<blockquote class="pv">“'+esc(x.vt)+'”<cite>— '+esc(x.vr)+'</cite></blockquote>';
+        grid.appendChild(d);
+      });
+      none.style.display=n?"none":"block";
+    }
+    search.addEventListener("input", render); render();
+  })();
+  </script>
+</body>
+</html>

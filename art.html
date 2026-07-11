@@ -22,13 +22,13 @@
         <a href="topics.html">주제별 말씀</a>
         <a href="calendar.html">교회력</a>
         <a href="toolkit.html">설교도구</a>
-        <a href="columns.html">칼럼</a>
+        <a href="people.html">인물사전</a>
         <a href="genealogy.html">족보</a>
+        <a href="map.html">지도</a>
         <a href="art.html" class="active">명화</a>
         <a href="quotes.html">명언</a>
         <a href="library.html">자료실</a>
         <a href="about.html">소개</a>
-        <a href="contact.html">연락</a>
       </nav>
     </div>
   </header>
@@ -278,15 +278,16 @@
         <div>성경의 눈으로 세상과 삶을 읽어냅니다.</div>
       </div>
       <nav class="footer-links">
-        <a href="index.html">홈</a>
         <a href="topics.html">주제별 말씀</a>
         <a href="calendar.html">교회력</a>
         <a href="toolkit.html">설교도구</a>
-        <a href="columns.html">칼럼</a>
+        <a href="people.html">인물사전</a>
         <a href="genealogy.html">족보</a>
+        <a href="map.html">지도</a>
         <a href="art.html">명화</a>
         <a href="quotes.html">명언</a>
         <a href="library.html">자료실</a>
+        <a href="columns.html">칼럼</a>
         <a href="about.html">소개</a>
         <a href="contact.html">연락</a>
       </nav>
@@ -295,5 +296,33 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+  // 각 명화 카드에 '원본 보기·다운로드' 링크를 추가한다.
+  // (인라인 이미지는 그대로 시도하되, 로딩 여부와 무관하게 원본을 볼 수 있도록 보장)
+  (function () {
+    var QUERIES = [
+      "Michelangelo Creation of Adam",
+      "Bruegel Tower of Babel Vienna",
+      "Caravaggio Sacrifice of Isaac Uffizi",
+      "Rembrandt Storm on the Sea of Galilee",
+      "Caravaggio Calling of Saint Matthew",
+      "Leonardo da Vinci Last Supper",
+      "Caravaggio Supper at Emmaus",
+      "Rembrandt Return of the Prodigal Son"
+    ];
+    var cards = document.querySelectorAll(".art-card");
+    cards.forEach(function (card, i) {
+      var q = QUERIES[i]; if (!q) return;
+      var body = card.querySelector(".art-body"); if (!body) return;
+      var a = document.createElement("a");
+      a.className = "art-src";
+      a.target = "_blank"; a.rel = "noopener";
+      a.href = "https://commons.wikimedia.org/w/index.php?search=" +
+               encodeURIComponent(q) + "&title=Special:MediaSearch&type=image";
+      a.textContent = "🖼️ 원본 보기·다운로드 ↗";
+      body.appendChild(a);
+    });
+  })();
+  </script>
 </body>
 </html>
