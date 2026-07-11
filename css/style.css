@@ -58,11 +58,11 @@ a:hover { text-decoration: underline; }
   border-bottom: 1px solid var(--line);
 }
 .nav {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; gap: 8px;
   height: 66px;
 }
 .brand {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 10px; margin-right: auto;
   font-family: var(--serif); font-weight: 700; font-size: 1.18rem;
   color: var(--ink); letter-spacing: -0.2px;
 }
@@ -91,8 +91,8 @@ a:hover { text-decoration: underline; }
 .nav-toggle span::before { position: absolute; top: -7px; }
 .nav-toggle span::after  { position: absolute; top: 7px; }
 
-@media (max-width: 760px) {
-  .nav-toggle { display: block; }
+@media (max-width: 900px) {
+  .nav-toggle { display: block; order: 3; }
   .nav-links {
     position: absolute; top: 66px; left: 0; right: 0;
     flex-direction: column; align-items: stretch; gap: 0;
@@ -627,6 +627,91 @@ section.block { padding: 64px 0; }
 .illus h3 { font-family: var(--serif); font-size: 1.16rem; margin: 6px 0 8px; }
 .illus p { margin: 0 0 8px; color: var(--ink); font-size: .98rem; }
 .illus .link-verse { font-size: .86rem; color: var(--primary); font-weight: 600; }
+
+/* ---------- 다크 모드 ---------- */
+:root[data-theme="dark"] {
+  --bg:        #141210;
+  --bg-soft:   #1e1b17;
+  --card:      #201d19;
+  --ink:       #ece5da;
+  --ink-soft:  #a89e90;
+  --line:      #332e27;
+  --primary:   #93a6dc;
+  --primary-d: #a6b6e8;
+  --accent:    #d8b25f;
+  --accent-s:  #322a19;
+  --shadow:    0 10px 34px rgba(0,0,0,.55);
+}
+body { transition: background .25s, color .25s; }
+:root[data-theme="dark"] .site-header { background: rgba(20, 18, 16, 0.92); }
+:root[data-theme="dark"] .lib-disclaimer { color: #e7d8b2; border-color: #4a3f27; }
+:root[data-theme="dark"] .lib-disclaimer strong { color: #f2e4c1; }
+:root[data-theme="dark"] .geneal-note,
+:root[data-theme="dark"] .art-note { color: #e2d1a6; }
+:root[data-theme="dark"] .pm-reflect { background: linear-gradient(135deg, #38300f, #2b2413); border-color: #4a3f27; }
+:root[data-theme="dark"] .pm-reflect p { color: #efdcae; }
+:root[data-theme="dark"] .badge-pd,
+:root[data-theme="dark"] .qcard .qbadge,
+:root[data-theme="dark"] .tv .copy.done { background: #1d3a28; color: #9fe0b8; border-color: #2c5540; }
+:root[data-theme="dark"] .badge-free { background: #22314a; color: #aac5f2; border-color: #35507a; }
+:root[data-theme="dark"] .art-fallback { color: #cdbf9f; }
+
+/* 테마 토글 버튼 (main.js가 삽입) */
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--card); color: var(--ink); cursor: pointer; font-size: 1.15rem;
+  display: grid; place-items: center; flex: 0 0 auto; transition: .15s; margin-left: 4px;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+
+/* ---------- 교회력 / 절기 ---------- */
+.season {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  overflow: hidden; margin: 18px 0; display: flex; flex-direction: column;
+}
+.season-bar { height: 8px; width: 100%; }
+.season-body { padding: 22px 24px 24px; }
+.season-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.season-head h3 { font-family: var(--serif); font-size: 1.35rem; margin: 0; color: var(--ink); }
+.season-head .en { font-size: .84rem; color: var(--ink-soft); }
+.season-head .color-tag {
+  margin-left: auto; font-size: .74rem; font-weight: 700; color: var(--ink-soft);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.season-head .swatch { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,.15); }
+.season .when { color: var(--accent); font-weight: 700; font-size: .84rem; margin: 0 0 12px; }
+.season .mean { color: var(--ink); margin: 0 0 14px; }
+.season .refs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.season .refs a, .season .refs span {
+  font-size: .82rem; font-weight: 600; color: var(--primary); background: var(--bg-soft);
+  border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px;
+}
+.season .idea {
+  background: var(--bg-soft); border-radius: 10px; padding: 12px 16px; font-size: .92rem; color: var(--ink-soft);
+}
+.season .idea b { color: var(--accent); }
+
+/* ---------- 설교/콘텐츠 도구 ---------- */
+.tool {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 22px 24px; margin: 18px 0; position: relative;
+}
+.tool .tool-cat { font-size: .74rem; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+.tool h3 { font-family: var(--serif); font-size: 1.28rem; margin: 6px 0 6px; color: var(--ink); }
+.tool .tool-desc { color: var(--ink-soft); font-size: .94rem; margin: 0 0 14px; }
+.tool pre {
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px 18px; margin: 0; overflow-x: auto; white-space: pre-wrap;
+  font-family: var(--sans); font-size: .95rem; line-height: 1.7; color: var(--ink);
+}
+.tool .copy-tpl {
+  position: absolute; top: 20px; right: 20px; font-size: .78rem; font-weight: 700;
+  color: var(--primary); background: var(--bg-soft); border: 1px solid var(--line);
+  border-radius: 8px; padding: 6px 12px; cursor: pointer;
+}
+.tool .copy-tpl:hover { border-color: var(--accent); }
+.tool .copy-tpl.done { color: #1f5130; }
+:root[data-theme="dark"] .tool .copy-tpl.done { color: #9fe0b8; }
 
 /* 유틸 */
 .center { text-align: center; }

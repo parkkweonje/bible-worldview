@@ -7,6 +7,38 @@
 (function () {
   "use strict";
 
+  /* ---- 다크 모드 ---- */
+  var root = document.documentElement;
+  function applyTheme(t) {
+    root.setAttribute("data-theme", t);
+    var btn = document.querySelector(".theme-toggle");
+    if (btn) {
+      btn.textContent = t === "dark" ? "☀️" : "🌙";
+      btn.setAttribute("aria-label", t === "dark" ? "밝은 테마로" : "어두운 테마로");
+    }
+  }
+  var stored = null;
+  try { stored = localStorage.getItem("bw-theme"); } catch (e) {}
+  var initial = stored ||
+    ((window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light");
+  applyTheme(initial);
+
+  var nav = document.querySelector(".nav");
+  var navToggleEl = document.querySelector(".nav-toggle");
+  if (nav) {
+    var tbtn = document.createElement("button");
+    tbtn.className = "theme-toggle";
+    tbtn.type = "button";
+    if (navToggleEl) nav.insertBefore(tbtn, navToggleEl);
+    else nav.appendChild(tbtn);
+    applyTheme(root.getAttribute("data-theme") || "light");
+    tbtn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+      try { localStorage.setItem("bw-theme", next); } catch (e) {}
+    });
+  }
+
   /* ---- 모바일 네비 ---- */
   var toggle = document.querySelector(".nav-toggle");
   var links = document.querySelector(".nav-links");
