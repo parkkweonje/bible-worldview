@@ -470,6 +470,53 @@ section.block { padding: 64px 0; }
   max-width: 780px; margin: 10px auto 0; padding-left: 22px; font-size: .9rem;
 }
 
+/* ---------- 클릭 가능한 트리 노드 + 묵상 모달 ---------- */
+.tnode.clickable { cursor: pointer; transition: background .16s, transform .16s; border-radius: 0 10px 10px 0; }
+.tnode.clickable:hover { background: var(--bg-soft); transform: translateX(2px); }
+.tnode.clickable:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tnode.clickable .more {
+  float: right; margin-right: 4px; font-size: .74rem; font-weight: 700; color: var(--accent);
+  opacity: 0; transition: opacity .16s;
+}
+.tnode.clickable:hover .more, .tnode.clickable:focus-visible .more { opacity: 1; }
+
+.pmodal { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.pmodal[hidden] { display: none; }
+.pmodal-backdrop { position: absolute; inset: 0; background: rgba(24, 20, 16, .55); backdrop-filter: blur(3px); animation: pm-fade .18s ease; }
+.pmodal-card {
+  position: relative; z-index: 1; width: 100%; max-width: 560px; max-height: 86vh; overflow-y: auto;
+  background: var(--card); border-radius: 16px; box-shadow: 0 24px 70px rgba(20,16,12,.4);
+  padding: 30px 30px 28px; animation: pm-pop .22s cubic-bezier(.2,.9,.3,1.2);
+}
+@keyframes pm-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pm-pop { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
+.pmodal-x {
+  position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--bg-soft); color: var(--ink-soft);
+  font-size: 1.3rem; line-height: 1; cursor: pointer;
+}
+.pmodal-x:hover { color: var(--primary); }
+.pm-gen { display: inline-block; font-size: .74rem; font-weight: 700; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; }
+.pmodal-card h3 { font-family: var(--serif); font-size: 1.7rem; margin: 6px 0 2px; color: var(--ink); }
+.pm-en { color: var(--ink-soft); font-size: .9rem; margin: 0 0 18px; }
+.pm-verse {
+  border-left: 3px solid var(--accent); background: var(--bg-soft); border-radius: 0 10px 10px 0;
+  padding: 14px 18px; margin: 0 0 18px; font-family: var(--serif); font-size: 1.08rem; line-height: 1.7; color: var(--ink);
+}
+.pm-verse cite { display: block; margin-top: 8px; font-style: normal; font-size: .84rem; color: var(--ink-soft); font-family: var(--sans); font-weight: 600; }
+.pm-section { margin: 0 0 16px; }
+.pm-section h4 { font-size: .8rem; letter-spacing: .6px; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+.pm-section p { margin: 0; font-size: 1rem; line-height: 1.75; color: var(--ink); }
+.pm-reflect {
+  background: linear-gradient(135deg, var(--accent-s), #f6eede); border: 1px solid #ecdcb6;
+  border-radius: 12px; padding: 16px 18px;
+}
+.pm-reflect h4 { color: var(--accent); }
+.pm-reflect p { color: #4a3915; }
+.pm-pray { margin: 16px 0 0; padding-top: 14px; border-top: 1px dashed var(--line);
+  font-family: var(--serif); font-style: italic; color: var(--primary); font-size: 1.02rem; }
+.pm-pray:empty { display: none; }
+
 /* 유틸 */
 .center { text-align: center; }
 .mt-lg { margin-top: 40px; }

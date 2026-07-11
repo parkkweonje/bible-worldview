@@ -82,6 +82,9 @@
           더 나아가 하나님께로까지 거슬러 올립니다. 아래는 아담에서 그리스도에게로 이어지는 생명의 줄기를
           한눈에 보는 가계 트리입니다.
         </p>
+        <p style="color:var(--accent);font-weight:600;font-size:.92rem;margin-top:10px">
+          👆 인물을 누르면 그 사람에 대한 성경절과 <strong>성령이 주시는 묵상</strong>이 자세히 열립니다.
+        </p>
       </div>
 
       <div class="tree">
@@ -640,6 +643,28 @@
     <div class="wrap" style="margin-top:18px">© <span data-year>2026</span> 성경으로 세상읽기 · All rights reserved.</div>
   </footer>
 
+  <!-- 인물 묵상 모달 -->
+  <div class="pmodal" id="pmodal" hidden>
+    <div class="pmodal-backdrop" data-close></div>
+    <div class="pmodal-card" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+      <button class="pmodal-x" data-close aria-label="닫기">×</button>
+      <span class="pm-gen" id="pm-gen"></span>
+      <h3 id="pm-title"></h3>
+      <p class="pm-en" id="pm-en"></p>
+      <blockquote class="pm-verse" id="pm-verse"></blockquote>
+      <div class="pm-section">
+        <h4>인물</h4>
+        <p id="pm-story"></p>
+      </div>
+      <div class="pm-section pm-reflect">
+        <h4>✨ 성령이 주시는 묵상</h4>
+        <p id="pm-reflect"></p>
+      </div>
+      <p class="pm-pray" id="pm-pray"></p>
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
+  <script src="js/genealogy.js"></script>
 </body>
 </html>
