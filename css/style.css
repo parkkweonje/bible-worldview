@@ -517,6 +517,117 @@ section.block { padding: 64px 0; }
   font-family: var(--serif); font-style: italic; color: var(--primary); font-size: 1.02rem; }
 .pm-pray:empty { display: none; }
 
+/* ---------- 홈 허브 포털 ---------- */
+.hub-grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+.hub-card {
+  display: flex; flex-direction: column; gap: 8px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  padding: 26px 24px; transition: .2s; position: relative; overflow: hidden;
+}
+.hub-card::after {
+  content: ""; position: absolute; inset: 0; border-radius: 16px;
+  box-shadow: inset 0 0 0 2px transparent; transition: .2s;
+}
+.hub-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); text-decoration: none; }
+.hub-card:hover::after { box-shadow: inset 0 0 0 2px var(--accent); }
+.hub-ico {
+  width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+  font-size: 1.7rem; background: linear-gradient(135deg, var(--accent-s), #eef1f8); margin-bottom: 6px;
+}
+.hub-card h3 { font-family: var(--serif); font-size: 1.24rem; margin: 0; color: var(--ink); }
+.hub-card p { margin: 0; color: var(--ink-soft); font-size: .93rem; line-height: 1.6; }
+.hub-card .go { margin-top: auto; padding-top: 12px; color: var(--accent); font-weight: 700; font-size: .88rem; }
+
+.stat-band {
+  display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  padding: 26px; box-shadow: var(--shadow); text-align: center;
+}
+.stat-band .s b { display: block; font-family: var(--serif); font-size: 1.9rem; color: var(--primary); }
+.stat-band .s span { font-size: .84rem; color: var(--ink-soft); }
+
+/* ---------- 주제별 말씀 도서관 ---------- */
+.topic-tools {
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  max-width: 900px; margin: 0 auto 8px;
+}
+#topic-search {
+  flex: 1; min-width: 220px; padding: 12px 16px; border: 1px solid var(--line);
+  border-radius: 12px; font-size: 1rem; background: var(--card); color: var(--ink);
+}
+.chip-row { display: flex; gap: 8px; flex-wrap: wrap; max-width: 900px; margin: 0 auto 24px; }
+.chip {
+  padding: 7px 15px; border-radius: 20px; border: 1px solid var(--line);
+  background: var(--card); color: var(--ink-soft); font-size: .88rem; font-weight: 600; cursor: pointer;
+  transition: .15s;
+}
+.chip:hover { border-color: var(--accent); color: var(--ink); }
+.chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.topic-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); max-width: 1000px; margin: 0 auto; }
+.topic-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.topic-card-head {
+  display: flex; align-items: center; gap: 12px; padding: 18px 20px; border-bottom: 1px solid var(--line);
+  background: linear-gradient(135deg, var(--accent-s), transparent);
+}
+.topic-card-head .ti { font-size: 1.5rem; }
+.topic-card-head h3 { font-family: var(--serif); font-size: 1.2rem; margin: 0; color: var(--ink); }
+.topic-card-head .cat { font-size: .74rem; color: var(--accent); font-weight: 700; }
+.topic-card-head .copyall {
+  margin-left: auto; font-size: .76rem; font-weight: 700; color: var(--primary);
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 8px;
+  padding: 6px 10px; cursor: pointer;
+}
+.topic-card-head .copyall:hover { background: var(--card); }
+.tv-list { padding: 8px 10px 14px; }
+.tv {
+  position: relative; padding: 12px 44px 12px 16px; border-radius: 10px; transition: background .15s;
+}
+.tv:hover { background: var(--bg-soft); }
+.tv .tv-text { font-family: var(--serif); font-size: 1.0rem; color: var(--ink); line-height: 1.6; }
+.tv .tv-ref { display: block; margin-top: 4px; font-size: .8rem; color: var(--accent); font-weight: 700; }
+.tv .copy {
+  position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink-soft); cursor: pointer;
+  font-size: .82rem; opacity: 0; transition: opacity .15s;
+}
+.tv:hover .copy { opacity: 1; }
+.tv .copy:hover { color: var(--primary); border-color: var(--accent); }
+.tv .copy.done { color: #1f5130; border-color: #b6e0c3; opacity: 1; }
+.no-result { text-align: center; color: var(--ink-soft); padding: 40px; max-width: 1000px; margin: 0 auto; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 30px;
+  font-size: .92rem; font-weight: 600; opacity: 0; pointer-events: none; transition: .25s; z-index: 400;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---------- 명언·예화 ---------- */
+.quote-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); max-width: 1000px; margin: 0 auto; }
+.qcard {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px 24px 20px;
+  display: flex; flex-direction: column; position: relative;
+}
+.qcard::before { content: "\201C"; font-family: var(--serif); font-size: 3.4rem; color: var(--accent-s);
+  position: absolute; top: 8px; left: 16px; line-height: 1; }
+.qcard blockquote { font-family: var(--serif); font-size: 1.12rem; line-height: 1.7; color: var(--ink);
+  margin: 18px 0 14px; position: relative; z-index: 1; }
+.qcard .qauthor { margin-top: auto; font-weight: 700; color: var(--primary); font-size: .94rem; }
+.qcard .qmeta { font-size: .78rem; color: var(--ink-soft); }
+.qcard .qbadge { display: inline-block; margin-top: 8px; font-size: .68rem; font-weight: 700;
+  color: #1f5130; background: #d8f0df; border: 1px solid #b6e0c3; padding: 1px 8px; border-radius: 20px; }
+.illus {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; margin: 14px 0;
+}
+.illus .theme { font-size: .74rem; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+.illus h3 { font-family: var(--serif); font-size: 1.16rem; margin: 6px 0 8px; }
+.illus p { margin: 0 0 8px; color: var(--ink); font-size: .98rem; }
+.illus .link-verse { font-size: .86rem; color: var(--primary); font-weight: 600; }
+
 /* 유틸 */
 .center { text-align: center; }
 .mt-lg { margin-top: 40px; }

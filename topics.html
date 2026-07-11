@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>주제별 말씀 — 성경으로 세상읽기</title>
+  <meta name="description" content="사랑·믿음·소망·위로·회개·감사·사명 등 주제별로 엄선한 성경절. 검색·필터·복사로 설교와 콘텐츠 준비에 바로 활용하세요." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html"><span class="mark">✝</span> 성경으로 세상읽기</a>
+      <button class="nav-toggle" aria-label="메뉴 열기"><span></span></button>
+      <nav class="nav-links">
+        <a href="index.html">홈</a>
+        <a href="topics.html" class="active">주제별 말씀</a>
+        <a href="columns.html">칼럼</a>
+        <a href="genealogy.html">족보</a>
+        <a href="art.html">명화</a>
+        <a href="quotes.html">명언</a>
+        <a href="library.html">자료실</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">연락</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:56px 0 26px">
+    <div class="wrap">
+      <span class="eyebrow">Topical Scripture Library</span>
+      <h1 style="font-size:clamp(1.9rem,4.6vw,2.8rem)">주제별 말씀</h1>
+      <p class="lead">
+        설교·유튜브·소그룹 준비의 시작점. 주제를 고르거나 검색하고, 필요한 구절을
+        <strong>복사 버튼</strong>으로 바로 대본에 옮기세요.
+      </p>
+    </div>
+  </section>
+
+  <section class="block" style="padding:26px 0">
+    <div class="wrap">
+      <div class="topic-tools">
+        <input id="topic-search" type="search" placeholder="🔍 주제나 구절 내용으로 검색 (예: 위로, 두려워하지 말라, 요한복음)" aria-label="말씀 검색" />
+      </div>
+      <div class="chip-row" id="chip-row"></div>
+      <div class="topic-grid" id="topic-grid"></div>
+      <div class="no-result" id="no-result" style="display:none">검색 결과가 없습니다. 다른 단어로 찾아보세요.</div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <div class="brand"><span class="mark">✝</span> 성경으로 세상읽기</div>
+        <div>설교와 콘텐츠를 위한 성경 자료 허브.</div>
+      </div>
+      <nav class="footer-links">
+        <a href="topics.html">주제별 말씀</a>
+        <a href="columns.html">칼럼</a>
+        <a href="genealogy.html">족보</a>
+        <a href="art.html">명화</a>
+        <a href="quotes.html">명언</a>
+        <a href="library.html">자료실</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">연락</a>
+      </nav>
+    </div>
+    <div class="wrap" style="margin-top:18px">© <span data-year>2026</span> 성경으로 세상읽기 · All rights reserved.</div>
+  </footer>
+
+  <div class="toast" id="toast">복사되었습니다 ✓</div>
+
+  <script src="js/main.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var TOPICS = [
+      { cat: "믿음·소망·사랑", icon: "❤️", title: "사랑", verses: [
+        { t: "사랑하지 아니하는 자는 하나님을 알지 못하나니 이는 하나님은 사랑이심이라", r: "요한일서 4:8" },
+        { t: "하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 그를 믿는 자마다 멸망하지 않고 영생을 얻게 하려 하심이라", r: "요한복음 3:16" },
+        { t: "사랑은 오래 참고 사랑은 온유하며 시기하지 아니하며 사랑은 자랑하지 아니하며 교만하지 아니하며", r: "고린도전서 13:4" },
+        { t: "우리가 아직 죄인 되었을 때에 그리스도께서 우리를 위하여 죽으심으로 하나님께서 우리에 대한 자기의 사랑을 확증하셨느니라", r: "로마서 5:8" },
+        { t: "새 계명을 너희에게 주노니 서로 사랑하라 내가 너희를 사랑한 것 같이 너희도 서로 사랑하라", r: "요한복음 13:34" }
+      ]},
+      { cat: "믿음·소망·사랑", icon: "🕊️", title: "믿음", verses: [
+        { t: "믿음은 바라는 것들의 실상이요 보이지 않는 것들의 증거니", r: "히브리서 11:1" },
+        { t: "믿음이 없이는 하나님을 기쁘시게 하지 못하나니 하나님께 나아가는 자는 반드시 그가 계신 것과 또한 그가 자기를 찾는 자들에게 상 주시는 이심을 믿어야 할지니라", r: "히브리서 11:6" },
+        { t: "예수께서 이르시되 할 수 있거든이 무슨 말이냐 믿는 자에게는 능히 하지 못할 일이 없느니라", r: "마가복음 9:23" },
+        { t: "그러므로 믿음은 들음에서 나며 들음은 그리스도의 말씀으로 말미암았느니라", r: "로마서 10:17" },
+        { t: "이는 우리가 믿음으로 행하고 보는 것으로 하지 아니함이로라", r: "고린도후서 5:7" }
+      ]},
+      { cat: "믿음·소망·사랑", icon: "🌅", title: "소망", verses: [
+        { t: "소망의 하나님이 모든 기쁨과 평강을 믿음 안에서 너희에게 충만하게 하사 성령의 능력으로 소망이 넘치게 하시기를 원하노라", r: "로마서 15:13" },
+        { t: "여호와의 말씀이니라 너희를 향한 나의 생각을 내가 아나니 평안이요 재앙이 아니니라 너희에게 미래와 희망을 주는 것이니라", r: "예레미야 29:11" },
+        { t: "우리가 알거니와 하나님을 사랑하는 자 곧 그의 뜻대로 부르심을 입은 자들에게는 모든 것이 합력하여 선을 이루느니라", r: "로마서 8:28" },
+        { t: "오직 여호와를 앙망하는 자는 새 힘을 얻으리니 독수리가 날개치며 올라감 같을 것이요 달음박질하여도 곤비하지 아니하겠고", r: "이사야 40:31" },
+        { t: "여호와의 인자와 긍휼이 무궁하시므로 우리가 진멸되지 아니함이니이다 이것들이 아침마다 새로우니 주의 성실하심이 크시도소이다", r: "예레미야애가 3:22-23" }
+      ]},
+      { cat: "위로·고난", icon: "🤲", title: "위로", verses: [
+        { t: "내가 사망의 음침한 골짜기로 다닐지라도 해를 두려워하지 않을 것은 주께서 나와 함께 하심이라 주의 지팡이와 막대기가 나를 안위하시나이다", r: "시편 23:4" },
+        { t: "애통하는 자는 복이 있나니 그들이 위로를 받을 것임이요", r: "마태복음 5:4" },
+        { t: "그는 모든 위로의 하나님이시며 우리의 모든 환난 중에서 우리를 위로하사 우리로 하여금 하나님께 받는 위로로써 모든 환난 중에 있는 자들을 능히 위로하게 하시는 이시로다", r: "고린도후서 1:3-4" },
+        { t: "여호와는 마음이 상한 자를 가까이 하시고 충심으로 통회하는 자를 구원하시는도다", r: "시편 34:18" },
+        { t: "모든 눈물을 그 눈에서 닦아 주시니 다시는 사망이 없고 애통하는 것이나 곡하는 것이나 아픈 것이 다시 있지 아니하리니", r: "요한계시록 21:4" }
+      ]},
+      { cat: "위로·고난", icon: "🌧️", title: "고난·인내", verses: [
+        { t: "생각하건대 현재의 고난은 장차 우리에게 나타날 영광과 비교할 수 없도다", r: "로마서 8:18" },
+        { t: "내 형제들아 너희가 여러 가지 시험을 당하거든 온전히 기쁘게 여기라 이는 너희 믿음의 시련이 인내를 만들어 내는 줄 너희가 앎이라", r: "야고보서 1:2-3" },
+        { t: "너희 염려를 다 주께 맡기라 이는 그가 너희를 돌보심이라", r: "베드로전서 5:7" },
+        { t: "내게 이르시기를 내 은혜가 네게 족하도다 이는 내 능력이 약한 데서 온전하여짐이라 하신지라", r: "고린도후서 12:9" },
+        { t: "의인은 고난이 많으나 여호와께서 그의 모든 고난에서 건지시는도다", r: "시편 34:19" }
+      ]},
+      { cat: "평안·두려움", icon: "🌿", title: "평안", verses: [
+        { t: "평안을 너희에게 끼치노니 곧 나의 평안을 너희에게 주노라 내가 너희에게 주는 것은 세상이 주는 것과 같지 아니하니라", r: "요한복음 14:27" },
+        { t: "아무것도 염려하지 말고 다만 모든 일에 기도와 간구로 너희 구할 것을 감사함으로 하나님께 아뢰라", r: "빌립보서 4:6" },
+        { t: "주께서 심지가 견고한 자를 평강하고 평강하도록 지키시리니 이는 그가 주를 신뢰함이니이다", r: "이사야 26:3" },
+        { t: "그리스도의 평강이 너희 마음을 주장하게 하라 너희는 평강을 위하여 한 몸으로 부르심을 받았나니", r: "골로새서 3:15" },
+        { t: "내가 평안히 눕고 자기도 하리니 나를 안전히 살게 하시는 이는 오직 여호와이시니이다", r: "시편 4:8" }
+      ]},
+      { cat: "평안·두려움", icon: "🛡️", title: "두려움 극복", verses: [
+        { t: "두려워하지 말라 내가 너와 함께 함이라 놀라지 말라 나는 네 하나님이 됨이라 내가 너를 굳세게 하리라 참으로 너를 도와 주리라", r: "이사야 41:10" },
+        { t: "하나님이 우리에게 주신 것은 두려워하는 마음이 아니요 오직 능력과 사랑과 절제하는 마음이니", r: "디모데후서 1:7" },
+        { t: "내가 두려워하는 날에는 주를 의지하리이다", r: "시편 56:3" },
+        { t: "내가 네게 명령한 것이 아니냐 강하고 담대하라 두려워하지 말며 놀라지 말라 네가 어디로 가든지 네 하나님 여호와가 너와 함께 하느니라", r: "여호수아 1:9" },
+        { t: "여호와는 나의 빛이요 나의 구원이시니 내가 누구를 두려워하리요 여호와는 내 생명의 능력이시니 내가 누구를 무서워하리요", r: "시편 27:1" }
+      ]},
+      { cat: "구원·회개", icon: "✝️", title: "구원", verses: [
+        { t: "너희는 그 은혜에 의하여 믿음으로 말미암아 구원을 받았으니 이것은 너희에게서 난 것이 아니요 하나님의 선물이라", r: "에베소서 2:8" },
+        { t: "네가 만일 네 입으로 예수를 주로 시인하며 또 하나님께서 그를 죽은 자 가운데서 살리신 것을 네 마음에 믿으면 구원을 받으리라", r: "로마서 10:9" },
+        { t: "다른 이로써는 구원을 받을 수 없나니 천하 사람 중에 구원을 받을 만한 다른 이름을 우리에게 주신 일이 없음이라", r: "사도행전 4:12" },
+        { t: "죄의 삯은 사망이요 하나님의 은사는 그리스도 예수 우리 주 안에 있는 영생이니라", r: "로마서 6:23" },
+        { t: "볼지어다 내가 문 밖에 서서 두드리노니 누구든지 내 음성을 듣고 문을 열면 내가 그에게로 들어가 그와 더불어 먹고 그는 나와 더불어 먹으리라", r: "요한계시록 3:20" }
+      ]},
+      { cat: "구원·회개", icon: "🔄", title: "회개·용서", verses: [
+        { t: "만일 우리가 우리 죄를 자백하면 그는 미쁘시고 의로우사 우리 죄를 사하시며 우리를 모든 불의에서 깨끗하게 하실 것이요", r: "요한일서 1:9" },
+        { t: "하나님이여 내 속에 정한 마음을 창조하시고 내 안에 정직한 영을 새롭게 하소서", r: "시편 51:10" },
+        { t: "여호와께서 말씀하시되 너희의 죄가 주홍 같을지라도 눈과 같이 희어질 것이요 진홍 같이 붉을지라도 양털 같이 희게 되리라", r: "이사야 1:18" },
+        { t: "그러므로 너희가 회개하고 돌이켜 너희 죄 없이 함을 받으라 이같이 하면 새롭게 되는 날이 주 앞으로부터 이를 것이요", r: "사도행전 3:19" },
+        { t: "서로 친절하게 하며 불쌍히 여기며 서로 용서하기를 하나님이 그리스도 안에서 너희를 용서하심과 같이 하라", r: "에베소서 4:32" }
+      ]},
+      { cat: "감사·예배", icon: "🙏", title: "감사", verses: [
+        { t: "범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", r: "데살로니가전서 5:18" },
+        { t: "감사함으로 그의 문에 들어가며 찬송함으로 그의 궁정에 들어가서 그에게 감사하며 그의 이름을 송축할지어다", r: "시편 100:4" },
+        { t: "여호와께 감사하라 그는 선하시며 그 인자하심이 영원함이로다", r: "시편 107:1" },
+        { t: "또 무엇을 하든지 말에나 일에나 다 주 예수의 이름으로 하고 그를 힘입어 하나님 아버지께 감사하라", r: "골로새서 3:17" },
+        { t: "범사에 우리 주 예수 그리스도의 이름으로 항상 아버지 하나님께 감사하며", r: "에베소서 5:20" }
+      ]},
+      { cat: "감사·예배", icon: "🎵", title: "예배·찬양", verses: [
+        { t: "오라 우리가 굽혀 경배하며 우리를 지으신 여호와 앞에 무릎을 꿇자", r: "시편 95:6" },
+        { t: "하나님은 영이시니 예배하는 자가 영과 진리로 예배할지니라", r: "요한복음 4:24" },
+        { t: "호흡이 있는 자마다 여호와를 찬양할지어다 할렐루야", r: "시편 150:6" },
+        { t: "그러므로 형제들아 내가 하나님의 모든 자비하심으로 너희를 권하노니 너희 몸을 하나님이 기뻐하시는 거룩한 산 제물로 드리라 이는 너희가 드릴 영적 예배니라", r: "로마서 12:1" },
+        { t: "내가 여호와를 항상 송축함이여 내 입술로 항상 주를 찬양하리이다", r: "시편 34:1" }
+      ]},
+      { cat: "지혜·말씀", icon: "🦉", title: "지혜", verses: [
+        { t: "너희 중에 누구든지 지혜가 부족하거든 모든 사람에게 후히 주시고 꾸짖지 아니하시는 하나님께 구하라 그리하면 주시리라", r: "야고보서 1:5" },
+        { t: "여호와를 경외하는 것이 지혜의 근본이요 거룩하신 자를 아는 것이 명철이니라", r: "잠언 9:10" },
+        { t: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라", r: "잠언 3:5" },
+        { t: "여호와를 경외함이 지혜의 근본이라 그의 계명을 지키는 자는 다 훌륭한 지각을 가진 자이니", r: "시편 111:10" },
+        { t: "그 안에는 지혜와 지식의 모든 보화가 감추어져 있느니라", r: "골로새서 2:3" }
+      ]},
+      { cat: "지혜·말씀", icon: "🧭", title: "인도하심", verses: [
+        { t: "너는 범사에 그를 인정하라 그리하면 네 길을 지도하시리라", r: "잠언 3:6" },
+        { t: "내가 네 갈 길을 가르쳐 보이고 너를 주목하여 훈계하리로다", r: "시편 32:8" },
+        { t: "주의 말씀은 내 발에 등이요 내 길에 빛이니이다", r: "시편 119:105" },
+        { t: "너희가 오른쪽으로 치우치든지 왼쪽으로 치우치든지 네 뒤에서 말소리가 네 귀에 들려 이르기를 이것이 바른 길이니 너희는 이리로 가라 할 것이며", r: "이사야 30:21" },
+        { t: "여호와께서 사람의 걸음을 정하시고 그의 길을 기뻐하시나니", r: "시편 37:23" }
+      ]},
+      { cat: "지혜·말씀", icon: "📜", title: "하나님의 말씀", verses: [
+        { t: "모든 성경은 하나님의 감동으로 된 것으로 교훈과 책망과 바르게 함과 의로 교육하기에 유익하니", r: "디모데후서 3:16" },
+        { t: "하나님의 말씀은 살아 있고 활력이 있어 좌우에 날선 어떤 검보다도 예리하여 혼과 영과 및 관절과 골수를 찔러 쪼개기까지 하며", r: "히브리서 4:12" },
+        { t: "이 율법책을 네 입에서 떠나지 말게 하며 주야로 그것을 묵상하여 그 안에 기록된 대로 다 지켜 행하라 그리하면 네 길이 평탄하게 될 것이며 네가 형통하리라", r: "여호수아 1:8" },
+        { t: "오직 여호와의 율법을 즐거워하여 그의 율법을 주야로 묵상하는도다 그는 시냇가에 심은 나무가 철을 따라 열매를 맺으며 그 잎사귀가 마르지 아니함 같으니", r: "시편 1:2-3" },
+        { t: "풀은 마르고 꽃은 시드나 우리 하나님의 말씀은 영원히 서리라", r: "이사야 40:8" }
+      ]},
+      { cat: "기도·영성", icon: "💬", title: "기도", verses: [
+        { t: "아무것도 염려하지 말고 다만 모든 일에 기도와 간구로 너희 구할 것을 감사함으로 하나님께 아뢰라", r: "빌립보서 4:6" },
+        { t: "구하라 그리하면 너희에게 주실 것이요 찾으라 그리하면 찾아낼 것이요 문을 두드리라 그리하면 너희에게 열릴 것이니", r: "마태복음 7:7" },
+        { t: "쉬지 말고 기도하라", r: "데살로니가전서 5:17" },
+        { t: "의인의 간구는 역사하는 힘이 큼이니라", r: "야고보서 5:16" },
+        { t: "너는 내게 부르짖으라 내가 네게 응답하겠고 네가 알지 못하는 크고 은밀한 일을 네게 보이리라", r: "예레미야 33:3" }
+      ]},
+      { cat: "관계·가정", icon: "🏠", title: "가정·자녀", verses: [
+        { t: "만일 여호와를 섬기는 것이 너희에게 좋지 않게 보이거든 … 오직 나와 내 집은 여호와를 섬기겠노라", r: "여호수아 24:15" },
+        { t: "마땅히 행할 길을 아이에게 가르치라 그리하면 늙어도 그것을 떠나지 아니하리라", r: "잠언 22:6" },
+        { t: "보라 자식들은 여호와의 기업이요 태의 열매는 그의 상급이로다", r: "시편 127:3" },
+        { t: "또 아비들아 너희 자녀를 노엽게 하지 말고 오직 주의 교훈과 훈계로 양육하라", r: "에베소서 6:4" },
+        { t: "오늘 내가 네게 명하는 이 말씀을 너는 마음에 새기고 네 자녀에게 부지런히 가르치며 집에 앉았을 때에든지 길을 갈 때에든지 이 말씀을 강론할 것이며", r: "신명기 6:6-7" }
+      ]},
+      { cat: "사명·전도", icon: "🌍", title: "사명·전도", verses: [
+        { t: "그러므로 너희는 가서 모든 민족을 제자로 삼아 아버지와 아들과 성령의 이름으로 세례를 베풀고", r: "마태복음 28:19" },
+        { t: "또 이르시되 너희는 온 천하에 다니며 만민에게 복음을 전파하라", r: "마가복음 16:15" },
+        { t: "오직 성령이 너희에게 임하시면 너희가 권능을 받고 예루살렘과 온 유대와 사마리아와 땅 끝까지 이르러 내 증인이 되리라", r: "사도행전 1:8" },
+        { t: "그런즉 그들이 믿지 아니하는 이를 어찌 부르리요 … 전파하는 자가 없이 어찌 들으리요", r: "로마서 10:14" },
+        { t: "이같이 너희 빛이 사람 앞에 비치게 하여 그들로 너희 착한 행실을 보고 하늘에 계신 너희 아버지께 영광을 돌리게 하라", r: "마태복음 5:16" }
+      ]},
+      { cat: "재정·청지기", icon: "💰", title: "재정·청지기", verses: [
+        { t: "만군의 여호와가 이르노라 너희의 온전한 십일조를 창고에 들여 나의 집에 양식이 있게 하고 그것으로 나를 시험하여 … 하늘 문을 열고 너희에게 복을 쌓을 곳이 없도록 붓지 아니하나 보라", r: "말라기 3:10" },
+        { t: "그런즉 너희는 먼저 그의 나라와 그의 의를 구하라 그리하면 이 모든 것을 너희에게 더하시리라", r: "마태복음 6:33" },
+        { t: "네 재물과 네 소산물의 처음 익은 열매로 여호와를 공경하라", r: "잠언 3:9" },
+        { t: "각각 그 마음에 정한 대로 할 것이요 인색함으로나 억지로 하지 말지니 하나님은 즐겨 내는 자를 사랑하시느니라", r: "고린도후서 9:7" },
+        { t: "나의 하나님이 그리스도 예수 안에서 영광 가운데 그 풍성한 대로 너희 모든 쓸 것을 채우시리라", r: "빌립보서 4:19" }
+      ]}
+    ];
+
+    var grid = document.getElementById("topic-grid");
+    var chipRow = document.getElementById("chip-row");
+    var search = document.getElementById("topic-search");
+    var noResult = document.getElementById("no-result");
+    var toast = document.getElementById("toast");
+    var toastTimer = null;
+
+    var cats = ["전체"]; TOPICS.forEach(function (t) { if (cats.indexOf(t.cat) < 0) cats.push(t.cat); });
+    var activeCat = "전체";
+
+    cats.forEach(function (c) {
+      var b = document.createElement("button");
+      b.className = "chip" + (c === "전체" ? " active" : "");
+      b.textContent = c;
+      b.addEventListener("click", function () {
+        activeCat = c;
+        chipRow.querySelectorAll(".chip").forEach(function (x) { x.classList.remove("active"); });
+        b.classList.add("active");
+        render();
+      });
+      chipRow.appendChild(b);
+    });
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 1600);
+    }
+
+    function copyText(text, btn, okMsg) {
+      function done() { showToast(okMsg || "복사되었습니다 ✓"); if (btn) { btn.classList.add("done"); btn.textContent = "✓"; setTimeout(function(){ btn.classList.remove("done"); btn.textContent = "⧉"; }, 1200); } }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+      } else { fallback(text); done(); }
+    }
+    function fallback(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    function esc(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+    function render() {
+      var q = (search.value || "").trim().toLowerCase();
+      grid.innerHTML = "";
+      var shown = 0;
+      TOPICS.forEach(function (topic) {
+        if (activeCat !== "전체" && topic.cat !== activeCat) return;
+        var verses = topic.verses;
+        if (q) {
+          var titleHit = (topic.title + " " + topic.cat).toLowerCase().indexOf(q) >= 0;
+          if (!titleHit) {
+            verses = topic.verses.filter(function (v) {
+              return (v.t + " " + v.r).toLowerCase().indexOf(q) >= 0;
+            });
+            if (!verses.length) return;
+          }
+        }
+        shown++;
+        var card = document.createElement("div");
+        card.className = "topic-card";
+        var vhtml = verses.map(function (v) {
+          return '<div class="tv"><span class="tv-text">“' + esc(v.t) + '”</span>' +
+                 '<span class="tv-ref">' + esc(v.r) + '</span>' +
+                 '<button class="copy" title="이 구절 복사" data-copy="' + esc(v.t) + ' (' + esc(v.r) + ')">⧉</button></div>';
+        }).join("");
+        card.innerHTML =
+          '<div class="topic-card-head"><span class="ti">' + topic.icon + '</span>' +
+          '<div><span class="cat">' + esc(topic.cat) + '</span><h3>' + esc(topic.title) + '</h3></div>' +
+          '<button class="copyall" title="주제 전체 복사">전체 복사</button></div>' +
+          '<div class="tv-list">' + vhtml + '</div>';
+        // copy handlers
+        card.querySelectorAll(".copy").forEach(function (btn) {
+          btn.addEventListener("click", function () { copyText(btn.getAttribute("data-copy"), btn); });
+        });
+        card.querySelector(".copyall").addEventListener("click", function () {
+          var all = "【" + topic.title + "】\n" + verses.map(function (v) { return "“" + v.t + "” (" + v.r + ")"; }).join("\n");
+          copyText(all, null, topic.title + " 구절을 모두 복사했습니다 ✓");
+        });
+        grid.appendChild(card);
+      });
+      noResult.style.display = shown ? "none" : "block";
+    }
+
+    search.addEventListener("input", render);
+    render();
+  })();
+  </script>
+</body>
+</html>
