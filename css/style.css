@@ -421,6 +421,55 @@ section.block { padding: 64px 0; }
 .res-card p { margin: 0; font-size: .88rem; color: var(--ink-soft); line-height: 1.6; }
 .res-card .host { display: block; margin-top: 10px; font-size: .78rem; color: var(--accent); font-weight: 700; }
 
+/* ---------- 가계 트리(Adam → Jesus) ---------- */
+.tree-intro { max-width: 780px; margin: 0 auto 6px; }
+.tree {
+  max-width: 780px; margin: 10px auto 0; padding-left: 6px;
+}
+.tree-era { margin: 30px 0 6px; padding-left: 6px; }
+.tree-era span {
+  display: inline-block; font-family: var(--serif); font-weight: 700; font-size: 1.02rem;
+  color: var(--primary); background: var(--accent-s);
+  padding: 5px 14px; border-radius: 20px;
+}
+.tree-era small { color: var(--ink-soft); font-weight: 600; font-family: var(--sans);
+  margin-left: 8px; font-size: .78rem; }
+.tnode {
+  position: relative; margin-left: 16px; padding: 9px 0 9px 26px;
+  border-left: 2px solid var(--line);
+}
+.tnode::before {
+  content: ""; position: absolute; left: -7px; top: 15px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--card); border: 2px solid var(--accent);
+}
+.tnode .gen {
+  display: inline-block; min-width: 34px; font-size: .72rem; font-weight: 700;
+  color: var(--accent); vertical-align: middle;
+}
+.tnode b { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); }
+.tnode .en { font-size: .78rem; color: var(--ink-soft); margin-left: 5px; }
+.tnode .tref {
+  display: block; margin: 2px 0 0 34px; font-size: .84rem; color: var(--ink-soft);
+}
+.tnode .tref em { font-style: normal; color: var(--accent); font-weight: 600; }
+.tnode.head::before { background: var(--primary); border-color: var(--primary); width: 15px; height: 15px; left: -8px; }
+.tnode.head b { color: var(--primary); }
+.tnode.mark-note b { }
+.tnode.christ {
+  background: linear-gradient(90deg, rgba(185,138,46,.10), transparent);
+  border-left-color: var(--accent); border-radius: 0 10px 10px 0;
+}
+.tnode.christ::before { background: var(--accent); border-color: #8a6a3a; width: 16px; height: 16px; left: -9px; }
+.tnode.christ b { color: #8a6a3a; font-size: 1.2rem; }
+.tnode.branch {
+  border-left-style: dashed;
+}
+.tnode.branch b { color: var(--ink-soft); font-weight: 400; font-style: italic; font-size: .96rem; }
+.tree-link {
+  max-width: 780px; margin: 10px auto 0; padding-left: 22px; font-size: .9rem;
+}
+
 /* 유틸 */
 .center { text-align: center; }
 .mt-lg { margin-top: 40px; }
